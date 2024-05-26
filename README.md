@@ -1,49 +1,51 @@
-# mock-API
-This is an assessment assignment for a mock API.
+# IBTech-API
 
+## Overview
 
-```Service Definition
+IBTech-API is a FastAPI-based project that provides a backend service for managing products and users. The project includes JWT authentication, role-based authorization, and CRUD operations for products. It uses SQLAlchemy for ORM and Pydantic for data validation.
 
-We require a secure and scalable RESTful API to manage product information within a e-commerce platform. This API will be used by internal systems and potentially external partners to interact with product data.
+## Features
 
-The API must allow for CRUD (Create, Read, Update, Delete) operations on product resources.
+- **JWT Authentication**: Secure user authentication using JSON Web Tokens (JWT).
+- **Role-Based Authorization**: Admin and user roles to manage access to various endpoints.
+- **Product Management**: CRUD operations for managing products.
+- **User Management**: User registration, login, and profile management.
+- **PostgreSQL**: Uses PostgreSQL as the database.
+- **Docker**: Dockerized for easy deployment and scalability.
 
-Product resources should include attributes like product name, description, category, price, stock availability, and high-quality image URLs.
+## Getting Started
 
-The API should enable filtering and searching for products based on various criteria (e.g., category, price range).
+### Prerequisites
 
-Secure authentication and authorization mechanisms are required to control access to the API.
+- Docker
+- Docker Compose
 
- 
+### Installation
 
-Resource Identification
+1. **Clone the repository**:
+    ```sh
+    git clone https://github.com/meshalal/IBTech-API.git
+    cd IBTech-API/backend
+    ```
 
-List the core entities (resources) involved in your service. These are the things users will interact with (e.g., products in the catalog)
+2. **Set up the environment variables**:
+    Create a `.env` file in the root directory and add the following:
+    ```env
+    DATABASE_URL=postgresql+psycopg2://dev_admin:dev_admin@localhost:5432/testdb
+    SECRET_KEY=your_secret_key
+    ACCESS_TOKEN_EXPIRE_MINUTES=30
+    ```
 
-Define the attributes (data fields) associated with each resource. You don't need to be very detailed.
+### Running the Application
 
- 
+1. **Run the application using Docker Compose**:
+    
+change your directory to the project root, then:
 
-Endpoints
+    ```sh
+    docker-compose up --build
+    ```
 
-Map the functionalities of your service to HTTP methods (GET, POST, PUT, DELETE) for the relevant resources.
+2. **Access the API documentation**:
+    Open your browser and navigate to `http://localhost:8000/docs` for the interactive API documentation.
 
-Design URL structures (endpoints) for each functionality. These URLs will be used to access and manipulate resources.
-
-Use nouns to represent resources (e.g., /books, /tasks)
-
-Consider including identifiers for specific resource instances (e.g., /books/{id})
-
- 
-
-Request and Response Schemas
-
-Define the data format used for requests and responses (in JSON).
-
-Create JSON Schemas for both requests and responses. These schemas should specify the structure and data types of the information being exchanged.
-
-Compile your API design choices into a clear and concise document using OpenAPI Schema. You can use the following tool for building the same - https://editor-next.swagger.io/
-
-Consider adding error codes and response structures for potential error scenarios.
-
-Include an example request and response for a specific functionality to illustrate usage.```

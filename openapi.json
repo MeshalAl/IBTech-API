@@ -1,0 +1,1081 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "FastAPI",
+        "version": "0.1.0"
+    },
+    "paths": {
+        "/products/": {
+            "post": {
+                "tags": [
+                    "products"
+                ],
+                "summary": "Create Product",
+                "operationId": "create_product_products__post",
+                "security": [
+                    {
+                        "HTTPBearer": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ProductCreate"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProductResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "products"
+                ],
+                "summary": "Read Products",
+                "operationId": "read_products_products__get",
+                "parameters": [
+                    {
+                        "name": "skip",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 0,
+                            "title": "Skip"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 10,
+                            "title": "Limit"
+                        }
+                    },
+                    {
+                        "name": "min_price",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "number"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Min Price"
+                        }
+                    },
+                    {
+                        "name": "max_price",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "number"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Max Price"
+                        }
+                    },
+                    {
+                        "name": "category",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Category"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ProductResponse"
+                                    },
+                                    "title": "Response Read Products Products  Get"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/products/{product_id}": {
+            "get": {
+                "tags": [
+                    "products"
+                ],
+                "summary": "Read Product",
+                "operationId": "read_product_products__product_id__get",
+                "parameters": [
+                    {
+                        "name": "product_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "Product Id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProductResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "products"
+                ],
+                "summary": "Update Product",
+                "operationId": "update_product_products__product_id__put",
+                "security": [
+                    {
+                        "HTTPBearer": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "product_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "Product Id"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ProductUpdate"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProductResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "products"
+                ],
+                "summary": "Delete Product",
+                "operationId": "delete_product_products__product_id__delete",
+                "security": [
+                    {
+                        "HTTPBearer": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "product_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "title": "Product Id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProductResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/": {
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Create User",
+                "operationId": "create_user_users__post",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserCreate"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Read Users",
+                "operationId": "read_users_users__get",
+                "security": [
+                    {
+                        "HTTPBearer": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "skip",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 0,
+                            "title": "Skip"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 10,
+                            "title": "Limit"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/UserResponse"
+                                    },
+                                    "title": "Response Read Users Users  Get"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/login": {
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Login For Access Token",
+                "operationId": "login_for_access_token_users_login_post",
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Username"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Password"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Token"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPError"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "HTTPError": {
+                "properties": {
+                    "error_code": {
+                        "type": "string",
+                        "title": "Error Code"
+                    },
+                    "error_description": {
+                        "type": "string",
+                        "title": "Error Description"
+                    },
+                    "error_message": {
+                        "type": "string",
+                        "title": "Error Message"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "error_code",
+                    "error_description",
+                    "error_message"
+                ],
+                "title": "HTTPError"
+            },
+            "HTTPValidationError": {
+                "properties": {
+                    "detail": {
+                        "items": {
+                            "$ref": "#/components/schemas/ValidationError"
+                        },
+                        "type": "array",
+                        "title": "Detail"
+                    }
+                },
+                "type": "object",
+                "title": "HTTPValidationError"
+            },
+            "ProductCreate": {
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "title": "Name"
+                    },
+                    "description": {
+                        "type": "string",
+                        "title": "Description"
+                    },
+                    "category": {
+                        "type": "string",
+                        "title": "Category"
+                    },
+                    "price": {
+                        "type": "number",
+                        "title": "Price"
+                    },
+                    "available": {
+                        "type": "boolean",
+                        "title": "Available"
+                    },
+                    "image_urls": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "type": "string"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Image Urls"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name",
+                    "description",
+                    "category",
+                    "price",
+                    "available",
+                    "image_urls"
+                ],
+                "title": "ProductCreate"
+            },
+            "ProductResponse": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "title": "Id"
+                    },
+                    "name": {
+                        "type": "string",
+                        "title": "Name"
+                    },
+                    "description": {
+                        "type": "string",
+                        "title": "Description"
+                    },
+                    "category": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Category"
+                    },
+                    "price": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Price"
+                    },
+                    "available": {
+                        "anyOf": [
+                            {
+                                "type": "boolean"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Available"
+                    },
+                    "image_urls": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "type": "string"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Image Urls"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id",
+                    "name",
+                    "description",
+                    "category",
+                    "price",
+                    "available",
+                    "image_urls"
+                ],
+                "title": "ProductResponse"
+            },
+            "ProductUpdate": {
+                "properties": {
+                    "name": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Name"
+                    },
+                    "description": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Description"
+                    },
+                    "category": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Category"
+                    },
+                    "price": {
+                        "anyOf": [
+                            {
+                                "type": "number"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Price"
+                    },
+                    "available": {
+                        "anyOf": [
+                            {
+                                "type": "boolean"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Available"
+                    },
+                    "image_urls": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "type": "string"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Image Urls"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name",
+                    "description",
+                    "category",
+                    "price",
+                    "available",
+                    "image_urls"
+                ],
+                "title": "ProductUpdate"
+            },
+            "Token": {
+                "properties": {
+                    "access_token": {
+                        "type": "string",
+                        "title": "Access Token"
+                    },
+                    "token_type": {
+                        "type": "string",
+                        "title": "Token Type"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "access_token",
+                    "token_type"
+                ],
+                "title": "Token"
+            },
+            "UserCreate": {
+                "properties": {
+                    "username": {
+                        "type": "string",
+                        "title": "Username"
+                    },
+                    "is_active": {
+                        "anyOf": [
+                            {
+                                "type": "boolean"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Is Active"
+                    },
+                    "is_admin": {
+                        "anyOf": [
+                            {
+                                "type": "boolean"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Is Admin"
+                    },
+                    "password": {
+                        "type": "string",
+                        "title": "Password"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "username",
+                    "password"
+                ],
+                "title": "UserCreate"
+            },
+            "UserResponse": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "title": "Id"
+                    },
+                    "username": {
+                        "type": "string",
+                        "title": "Username"
+                    },
+                    "is_active": {
+                        "type": "boolean",
+                        "title": "Is Active"
+                    },
+                    "is_admin": {
+                        "type": "boolean",
+                        "title": "Is Admin"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "title": "Created At"
+                    },
+                    "updated_at": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Updated At"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id",
+                    "username",
+                    "is_active",
+                    "is_admin",
+                    "created_at",
+                    "updated_at"
+                ],
+                "title": "UserResponse"
+            },
+            "ValidationError": {
+                "properties": {
+                    "loc": {
+                        "items": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "integer"
+                                }
+                            ]
+                        },
+                        "type": "array",
+                        "title": "Location"
+                    },
+                    "msg": {
+                        "type": "string",
+                        "title": "Message"
+                    },
+                    "type": {
+                        "type": "string",
+                        "title": "Error Type"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "loc",
+                    "msg",
+                    "type"
+                ],
+                "title": "ValidationError"
+            }
+        },
+        "securitySchemes": {
+            "HTTPBearer": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        }
+    }
+}

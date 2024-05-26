@@ -22,19 +22,19 @@ services:
     networks:
       - internal_nw
 
-  # backend:
-  #   build:
-  #     context: ./backend
-  #     dockerfile: DockerFile 
-  #   container_name: backend-node
-  #   hostname: backend
-  #   ports:
-  #     - "8000:8000"
-  #   restart: always
-  #   depends_on:
-  #     - db
-  #   env_file:
-  #     - .env
-  #   networks:
-  #     - internal_nw
+  backend:
+    build:
+      context: ./backend
+      dockerfile: DockerFile 
+    container_name: backend-node
+    hostname: backend
+    ports:
+      - "8000:8000"
+    restart: always
+    depends_on:
+      - db
+    env_file:
+      - .env
+    networks:
+      - internal_nw
 

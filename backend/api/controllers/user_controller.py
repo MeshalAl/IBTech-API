@@ -21,7 +21,7 @@ router = APIRouter()
              responses={
                  400: {"description": "Bad Request", "model": HTTPError},
                  401: {"description": "Unauthorized", "model": HTTPError},
-                 403: {"description": "Forbidden", "model": HTTPError}
+                 403: {"description": "Forbidden", "model": HTTPError},
              })
 def create_user(
     user: UserCreate,
@@ -34,17 +34,18 @@ def create_user(
 @router.get("/", response_model=List[UserResponse],
             responses={
                  400: {"description": "Bad Request", "model": HTTPError},
+                 404: {"description": "Not Found", "model": HTTPError}
              })
 def read_users(skip: int = 0,
                limit: int = 10,
                db: Session = Depends(get_session),
                current_user=Depends(get_current_active_admin)
-               ):
+                ):
     service = UserService(db)
     return service.get_users(skip, limit)
 
 @router.post("/login", response_model=Token,
-                          responses={
+                responses={
                  400: {"description": "Bad Request", "model": HTTPError},
              })
 def login_for_access_token(form_data: HTTPBasicCredentials = Depends(), db: Session = Depends(get_session)):

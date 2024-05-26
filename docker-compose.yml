@@ -1,0 +1,40 @@
+version: "3.9"
+
+networks:
+  internal_nw:
+    name: internal_nw
+    driver: bridge
+
+volumes:
+  postgres_data: 
+
+services:
+  db:
+    image: postgres:latest
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: test_db
+      POSTGRES_USER: dev_admin
+      POSTGRES_PASSWORD: dev_admin
+    ports:
+      - 5432:5432
+    networks:
+      - internal_nw
+
+  # backend:
+  #   build:
+  #     context: ./backend
+  #     dockerfile: DockerFile 
+  #   container_name: backend-node
+  #   hostname: backend
+  #   ports:
+  #     - "8000:8000"
+  #   restart: always
+  #   depends_on:
+  #     - db
+  #   env_file:
+  #     - .env
+  #   networks:
+  #     - internal_nw
+

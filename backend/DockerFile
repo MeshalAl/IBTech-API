@@ -1,0 +1,19 @@
+FROM python:3.12-alpine
+
+COPY entrypoint.sh /usr/local/bin/
+
+RUN apk add --no-cache netcat-openbsd
+
+# RUN apt-get update && apt-get install -y netcat-openbsd
+
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+WORKDIR /IBTech-api
+
+COPY . .
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+ENTRYPOINT ["entrypoint.sh", "db"]
+
+CMD ["python", "main.py"]
